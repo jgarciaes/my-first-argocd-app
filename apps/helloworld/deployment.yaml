@@ -14,10 +14,9 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: quay.io/prometheus/busybox:latest
-        command: ["sh", "-c", "echo hello world && sleep 3600"]  # Keep container alive for testing
+        image: k8s.gcr.io/echoserver:1.10
         ports:
-        - containerPort: 80  # define port for service to target
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +28,5 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 80
+    targetPort: 8080
   type: ClusterIP
